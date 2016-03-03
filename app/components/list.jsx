@@ -1,20 +1,20 @@
+'use strict'
+
 import React, { Component } from 'react'
+//import { ListGroup } from 'react-bootstrap'
+import ListGroup from 'react-bootstrap/lib/ListGroup'
 import Item from './item'
 
 class List extends Component{
   render(){
     return(
-      <ul className='media-list'>
+      <ListGroup>
         {
-          this.props.listado.map((empleado) => {
-            return  <Item key={empleado.id} 
-                        name={empleado.name} 
-                        picture={empleado.picture} 
-                        title={empleado.title} 
-                        department={empleado.department} />
+          this.props.tasks.map((task) => {
+            return  <Item key={task.id} title={task.title} />
           })
         }
-      </ul>
+      </ListGroup>
     )
   }
 }
