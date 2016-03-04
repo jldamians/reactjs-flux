@@ -1,8 +1,8 @@
 'use strict'
 
 import React, { Component } from 'react'
-//import { ListGroup } from 'react-bootstrap'
-import ListGroup from 'react-bootstrap/lib/ListGroup'
+import { ListGroup } from 'react-bootstrap'
+
 import Item from './item'
 
 class List extends Component{
@@ -10,8 +10,8 @@ class List extends Component{
     return(
       <ListGroup>
         {
-          this.props.tasks.map((task) => {
-            return  <Item key={task.id} title={task.title} />
+          this.props.items.map((item) => {
+            return  <Item key={item.id} title={item.title} />
           })
         }
       </ListGroup>

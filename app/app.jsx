@@ -14,6 +14,6 @@ var _tasks = [
   { id: 6, title: "Implementacion en Producción"}
 ]
 
-render(<List tasks={_tasks} />, document.getElementById('app'))
+render(<List items={_tasks} />, document.getElementById('app'))
 
 

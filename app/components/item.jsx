@@ -1,8 +1,7 @@
 'use strict'
 
 import React, { Component } from 'react'
-//import { ListGroupItem } from 'react-bootstrap'
-import ListGroupItem from 'react-bootstrap/lib/ListGroupItem'
+import { ListGroupItem } from 'react-bootstrap'
 
 class Item extends Component{
 	render() {
