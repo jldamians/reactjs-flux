@@ -36826,7 +36826,7 @@
 
 		switch (action.actionType) {
 			case _constants2.default.ADD_TASK:
-				_store.list.push(action.id);
+				_store.list.push(action.data);
 
 				store.emit(CHANGE_EVENT);
 

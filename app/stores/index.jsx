@@ -54,7 +54,7 @@ Dispatcher.register((payload) => {
 
 	switch(action.actionType) {
 		case constants.ADD_TASK:
-			_store.list.push(action.id)
+			_store.list.push(action.data)
 
    		store.emit(CHANGE_EVENT)
 
