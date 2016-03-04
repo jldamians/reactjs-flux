@@ -1,7 +1,7 @@
 'use strict'
 
-import Dispatcher import '../dispatcher'
-import constants import '../constants'
+import Dispatcher from '../dispatcher'
+import constants from '../constants'
 
 // metodos que notifican a traves del "dispatcher",
 // una accion a uno o mas "stores"

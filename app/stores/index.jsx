@@ -1,7 +1,8 @@
 'use strict'
 
-import Dispatcher import '../dispatcher'
-import constants import '../constants'
+import Dispatcher from '../dispatcher'
+import constants from '../constants'
+import _tasks from '../assets/tasks'
 
 // sirve para generar eventos
 // on: crea un evento
@@ -20,8 +21,8 @@ let _store = {
 }
 
 // La clase "Store" hereda la clase "EventEmitter"
-// esta clase nos permite definir un evento para el store
-// las funciones deberan ser ejecutadas desde el "component"
+// Esta clase nos permite definir un evento para el store.
+// Las funciones deberan ser ejecutadas desde el "component"
 class Store extends EventEmitter {
 	addChangeListener(handle) {
 		this.on(CHANGE_EVENT, handle)
@@ -33,6 +34,10 @@ class Store extends EventEmitter {
 
 	getList() {
 		return _store.list
+	}
+
+	loadList() {
+		_store.list = _tasks
 	}
 }
 

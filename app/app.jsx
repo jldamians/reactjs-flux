@@ -5,9 +5,6 @@ import { render } from 'react-dom'
 
 import Main from './components/main'
 
-import _tasks from './assets/tasks'
-
-
 render(<Main tasks={_tasks} />, document.getElementById('app'))
 
 
