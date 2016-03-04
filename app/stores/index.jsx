@@ -16,8 +16,8 @@ let _store = {
 	list: []
 }
 
-// La clase 'TodoStore' hereda la clase 'EventEmitter'
-class TodoStore extends EventEmitter {
+// La clase 'Store' hereda la clase 'EventEmitter'
+class Store extends EventEmitter {
 	addChangeListener(handle) {
 		this.on(CHANGE_EVENT, handle)
 	}
@@ -33,22 +33,22 @@ class TodoStore extends EventEmitter {
 
 // instanciamos el store
 
-const todoStore = new TodoStore()
+const store = new Store()
 
 Dispatcher.register((payload) => {
 	const action = payload.action
 
 	switch(action) {
 		case constants.ADD_TASK:
-			_store.list.push(action.task)
+			_store.list.push(action.data)
 
-   		todoStore.emit(CHANGE_EVENT)
+   		store.emit(CHANGE_EVENT)
 
     	break
     case constants.REMOVE_TASK:
-    	_store.list.splice(action.task.id)
+    	_store.list.splice(action.data.id)
 
-    	todoStore.emit(CHANGE_EVENT)
+    	store.emit(CHANGE_EVENT)
 
     	break
     default:
@@ -56,4 +56,4 @@ Dispatcher.register((payload) => {
 	}
 })
 
-export default todoStore
+export default store
