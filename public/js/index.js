@@ -52,15 +52,17 @@
 
 	var _reactDom = __webpack_require__(158);
 
+	var _tasks2 = __webpack_require__(408);
+
+	var _tasks3 = _interopRequireDefault(_tasks2);
+
 	var _main = __webpack_require__(406);
 
 	var _main2 = _interopRequireDefault(_main);
 
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
-	var _tasks = [{ id: 1, title: "Levantamiento de Información" }, { id: 2, title: "Requerimientos funcionales" }, { id: 3, title: "Diseño de DB" }, { id: 4, title: "Desarrollo del Sistema" }, { id: 5, title: "Pruebas Unitarias" }, { id: 6, title: "Implementacion en Producción" }];
-
-	(0, _reactDom.render)(_react2.default.createElement(_main2.default, { tasks: _tasks }), document.getElementById('app'));
+	(0, _reactDom.render)(_react2.default.createElement(_main2.default, { tasks: _tasks3.default }), document.getElementById('app'));
 
 /***/ },
 /* 1 */
@@ -36614,6 +36616,19 @@
 	}(_react.Component);
 
 	exports.default = Add;
+
+/***/ },
+/* 408 */
+/***/ function(module, exports) {
+
+	'use strict';
+
+	Object.defineProperty(exports, "__esModule", {
+	  value: true
+	});
+	var tasks = [{ id: 1, title: "Levantamiento de Información" }, { id: 2, title: "Requerimientos funcionales" }, { id: 3, title: "Diseño de DB" }, { id: 4, title: "Desarrollo del Sistema" }, { id: 5, title: "Pruebas Unitarias" }, { id: 6, title: "Implementacion en Producción" }];
+
+	exports.default = tasks;
 
 /***/ }
 /******/ ]);

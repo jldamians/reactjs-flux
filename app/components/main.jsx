@@ -12,7 +12,7 @@ class Main extends Component {
 		  <Grid>
 		    <Row className="show-grid">
 		    	<Col xs={6} sm={6} md={6} xsOffset={3} smOffset={3} mdOffset={3}>
-		    		<Add/>
+		    		<Add />
 						<List items={this.props.tasks} />
 					</Col>
 		    </Row>
