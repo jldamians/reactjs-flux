@@ -15,4 +15,4 @@ class ActionDispatcher extends Dispatcher {
 
 const actionDispatcher = new ActionDispatcher()
 
-default export actionDispatcher
+export default actionDispatcher

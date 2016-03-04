@@ -13,9 +13,10 @@ class Main extends Component {
   constructor(props) {
   	super(props)
 
-  	this.state = {
-  		return _getAppState();
-  	}
+  	this._getAppState = this._getAppState.bind(this)
+  	this._onChange = this._onChange.bind(this)
+
+  	this.state = this._getAppState()
   }
 
 	_getAppState() {
@@ -25,20 +26,23 @@ class Main extends Component {
 	}
 
   _onChange(){
-    this.setState(_getAppState())
+    this.setState(this._getAppState())
   }
 
+  // ciclo de vida del componente, solo se ejecutara una vez,
+  // cuando el renderizado haya concluido, y si utilizas react unicamente en el cliente
   componentDidMount(){
   	Store.loadList()
   }
 
-
+  // ciclo de vida del componente, solo se ejecutara una vez,
+  // cuando el renderizado haya concluido, y si utilizas react en el cliente o servidor
   componentWillMount() {
-    Store.addChangeListener(_onChange)
+    Store.addChangeListener(this._onChange)
   }
 
   componentWillUnmount() {
-    Store.removeChangeListener(_onChange)
+    Store.removeChangeListener(this._onChange)
   }
 
 	render() {

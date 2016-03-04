@@ -37,7 +37,10 @@ class Store extends EventEmitter {
 	}
 
 	loadList() {
-		_store.list = _tasks
+		Dispatcher.handleAction({
+			actionType: constants.LOAD_TASK,
+			data: _tasks
+		})
 	}
 }
 
@@ -49,7 +52,7 @@ const store = new Store()
 Dispatcher.register((payload) => {
 	const action = payload.action
 
-	switch(action) {
+	switch(action.actionType) {
 		case constants.ADD_TASK:
 			_store.list.push(action.data)
 
@@ -61,6 +64,12 @@ Dispatcher.register((payload) => {
 
     	store.emit(CHANGE_EVENT)
 
+    	break
+    case constants.LOAD_TASK:
+    	_store.list = action.data
+
+    	store.emit(CHANGE_EVENT)
+    	
     	break
     default:
     	return true

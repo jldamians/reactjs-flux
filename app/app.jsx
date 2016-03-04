@@ -5,6 +5,6 @@ import { render } from 'react-dom'
 
 import Main from './components/main'
 
-render(<Main tasks={_tasks} />, document.getElementById('app'))
+render(<Main />, document.getElementById('app'))
 
 
