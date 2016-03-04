@@ -36589,10 +36589,9 @@
 	  function Add(props) {
 	    _classCallCheck(this, Add);
 
-	    var _this = _possibleConstructorReturn(this, Object.getPrototypeOf(Add).call(this, props));
+	    return _possibleConstructorReturn(this, Object.getPrototypeOf(Add).call(this, props));
 
-	    _this._handleAdd = _this._handleAdd.bind(_this);
-	    return _this;
+	    //this._handleAdd = this._handleAdd.bind(this)
 	  }
 
 	  _createClass(Add, [{
@@ -36600,6 +36599,7 @@
 	    value: function _handleAdd(event) {
 	      var elements = _reactDom2.default.findDOMNode(this.refs.nameTask);
 	      var nameTask = elements.querySelector('input').value;
+
 	      console.log(nameTask);
 	    }
 	  }, {

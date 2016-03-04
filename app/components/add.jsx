@@ -8,12 +8,13 @@ class Add extends Component{
 	constructor(props) {
 		super(props)
 
-		this._handleAdd = this._handleAdd.bind(this)
+		//this._handleAdd = this._handleAdd.bind(this)
 	}
 
 	_handleAdd(event) {
     var elements = ReactDOM.findDOMNode(this.refs.nameTask)
     var nameTask = elements.querySelector('input').value
+
     console.log(nameTask)
 	}
 
