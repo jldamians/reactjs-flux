@@ -8,14 +8,21 @@ class Add extends Component{
 	constructor(props) {
 		super(props)
 
-		//this._handleAdd = this._handleAdd.bind(this)
+		// definimos que la funcion tenga alcance local
+		this._handleAdd = this._handleAdd.bind(this)
 	}
 
 	_handleAdd(event) {
     var elements = ReactDOM.findDOMNode(this.refs.nameTask)
     var nameTask = elements.querySelector('input').value
+    var objTask = {
+      id: new Date().toJSON(),
+      name: nameTask
+    }
 
-    console.log(nameTask)
+    elements.querySelector('input').value = ''
+
+    this.props.add(objTask);
 	}
 
 	render() {

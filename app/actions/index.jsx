@@ -19,7 +19,7 @@ let actions = {
 	removeTask: function(id) {
 		Dispatcher.handleAction({
 			actionType: constants.REMOVE_TASK,
-			data: id
+			id: id
 		})
 	}
 }

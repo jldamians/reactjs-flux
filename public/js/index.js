@@ -19745,6 +19745,10 @@
 
 	var _stores2 = _interopRequireDefault(_stores);
 
+	var _actions = __webpack_require__(416);
+
+	var _actions2 = _interopRequireDefault(_actions);
+
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 	function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
@@ -19759,14 +19763,23 @@
 	  function Main(props) {
 	    _classCallCheck(this, Main);
 
+	    // indicamos _getAppState y _handleChange
+	    // estan dentro del alcance de la clase (es muy necesario)
+
 	    var _this = _possibleConstructorReturn(this, Object.getPrototypeOf(Main).call(this, props));
 
 	    _this._getAppState = _this._getAppState.bind(_this);
-	    _this._onChange = _this._onChange.bind(_this);
+	    _this._handleChange = _this._handleChange.bind(_this);
+	    _this._handleAdd = _this._handleAdd.bind(_this);
+	    _this._handleRemove = _this._handleRemove.bind(_this);
 
+	    // estado del "componente"
 	    _this.state = _this._getAppState();
 	    return _this;
 	  }
+
+	  // genera, setea y retorna los "state" del componente
+
 
 	  _createClass(Main, [{
 	    key: '_getAppState',
@@ -19775,10 +19788,24 @@
 	        listTasks: _stores2.default.getList()
 	      };
 	    }
+
+	    // este metodo sera el handle del evento del "dispatcher"
+	    // el "dispatcher" para cada accion que recibe, ejecuta este metodo
+
 	  }, {
-	    key: '_onChange',
-	    value: function _onChange() {
+	    key: '_handleChange',
+	    value: function _handleChange() {
 	      this.setState(this._getAppState());
+	    }
+	  }, {
+	    key: '_handleAdd',
+	    value: function _handleAdd(newTask) {
+	      _actions2.default.addTask(newTask);
+	    }
+	  }, {
+	    key: '_handleRemove',
+	    value: function _handleRemove(id) {
+	      _actions2.default.removeTask(id);
 	    }
 
 	    // ciclo de vida del componente, solo se ejecutara una vez,
@@ -19796,13 +19823,16 @@
 	  }, {
 	    key: 'componentWillMount',
 	    value: function componentWillMount() {
-	      _stores2.default.addChangeListener(this._onChange);
+	      _stores2.default.addChangeListener(this._handleChange);
 	    }
 	  }, {
 	    key: 'componentWillUnmount',
 	    value: function componentWillUnmount() {
-	      _stores2.default.removeChangeListener(this._onChange);
+	      _stores2.default.removeChangeListener(this._handleChange);
 	    }
+
+	    // cada vez que un "state" es seteado, se renderiza el componente
+
 	  }, {
 	    key: 'render',
 	    value: function render() {
@@ -19815,8 +19845,8 @@
 	          _react2.default.createElement(
 	            _reactBootstrap.Col,
 	            { xs: 6, sm: 6, md: 6, xsOffset: 3, smOffset: 3, mdOffset: 3 },
-	            _react2.default.createElement(_add2.default, null),
-	            _react2.default.createElement(_list2.default, { items: this.state.listTasks })
+	            _react2.default.createElement(_add2.default, { add: this._handleAdd }),
+	            _react2.default.createElement(_list2.default, { items: this.state.listTasks, remove: this._handleRemove })
 	          )
 	        )
 	      );
@@ -36522,11 +36552,13 @@
 	  _createClass(List, [{
 	    key: 'render',
 	    value: function render() {
+	      var _this2 = this;
+
 	      return _react2.default.createElement(
 	        _reactBootstrap.ListGroup,
 	        null,
 	        this.props.items.map(function (item) {
-	          return _react2.default.createElement(_item2.default, { key: item.id, title: item.title });
+	          return _react2.default.createElement(_item2.default, { key: item.id, data: item, remove: _this2.props.remove });
 	        })
 	      );
 	    }
@@ -36580,11 +36612,11 @@
 					{ bsStyle: 'success' },
 					_react2.default.createElement(
 						_reactBootstrap.Button,
-						null,
+						{ onClick: this.props.remove.bind(null, this.props.data.id) },
 						_react2.default.createElement(_reactBootstrap.Glyphicon, { glyph: 'trash' })
 					),
 					'  ',
-					this.props.title
+					this.props.data.name
 				);
 			}
 		}]);
@@ -36630,9 +36662,12 @@
 	  function Add(props) {
 	    _classCallCheck(this, Add);
 
-	    return _possibleConstructorReturn(this, Object.getPrototypeOf(Add).call(this, props));
+	    // definimos que la funcion tenga alcance local
 
-	    //this._handleAdd = this._handleAdd.bind(this)
+	    var _this = _possibleConstructorReturn(this, Object.getPrototypeOf(Add).call(this, props));
+
+	    _this._handleAdd = _this._handleAdd.bind(_this);
+	    return _this;
 	  }
 
 	  _createClass(Add, [{
@@ -36640,8 +36675,14 @@
 	    value: function _handleAdd(event) {
 	      var elements = _reactDom2.default.findDOMNode(this.refs.nameTask);
 	      var nameTask = elements.querySelector('input').value;
+	      var objTask = {
+	        id: new Date().toJSON(),
+	        name: nameTask
+	      };
 
-	      console.log(nameTask);
+	      elements.querySelector('input').value = '';
+
+	      this.props.add(objTask);
 	    }
 	  }, {
 	    key: 'render',
@@ -36780,15 +36821,24 @@
 
 		switch (action.actionType) {
 			case _constants2.default.ADD_TASK:
-				_store.list.push(action.data);
+				_store.list.push(action.id);
 
 				store.emit(CHANGE_EVENT);
 
 				break;
 			case _constants2.default.REMOVE_TASK:
-				_store.list.splice(action.data.id);
+				var item = -1;
 
-				store.emit(CHANGE_EVENT);
+				_store.list.forEach(function (element, index) {
+					if (element.id === action.id) {
+						item = index;
+					}
+				});
+
+				if (item != -1) {
+					_store.list.splice(item, 1);
+					store.emit(CHANGE_EVENT);
+				}
 
 				break;
 			case _constants2.default.LOAD_TASK:
@@ -36879,7 +36929,7 @@
 	Object.defineProperty(exports, "__esModule", {
 	  value: true
 	});
-	var tasks = [{ id: 1, title: "Levantamiento de Información" }, { id: 2, title: "Requerimientos funcionales" }, { id: 3, title: "Diseño de DB" }, { id: 4, title: "Desarrollo del Sistema" }, { id: 5, title: "Pruebas Unitarias" }, { id: 6, title: "Implementacion en Producción" }, { id: 7, title: "Capacitaciones" }, { id: 8, title: "Cierre del Proyecto" }];
+	var tasks = [{ id: 1, name: "Levantamiento de Información" }, { id: 2, name: "Requerimientos funcionales" }, { id: 3, name: "Diseño de DB" }, { id: 4, name: "Desarrollo del Sistema" }, { id: 5, name: "Pruebas Unitarias" }, { id: 6, name: "Implementacion en Producción" }, { id: 7, name: "Capacitaciones" }, { id: 8, name: "Cierre del Proyecto" }];
 
 	exports.default = tasks;
 
@@ -37469,6 +37519,49 @@
 
 	module.exports = invariant;
 	/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(4)))
+
+/***/ },
+/* 416 */
+/***/ function(module, exports, __webpack_require__) {
+
+	'use strict';
+
+	Object.defineProperty(exports, "__esModule", {
+		value: true
+	});
+
+	var _dispatcher = __webpack_require__(409);
+
+	var _dispatcher2 = _interopRequireDefault(_dispatcher);
+
+	var _constants = __webpack_require__(410);
+
+	var _constants2 = _interopRequireDefault(_constants);
+
+	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+	// metodos que notifican a traves del "dispatcher",
+	// una accion a uno o mas "stores"
+	var actions = {
+		// a travez del "dispatcher" indicamos al "store"
+		// que vamos a agregar un dato a las lista de "tasks"
+		addTask: function addTask(task) {
+			_dispatcher2.default.handleAction({
+				actionType: _constants2.default.ADD_TASK,
+				data: task
+			});
+		},
+		// a travez del "dispatcher" indicamos al "store"
+		// que vamos a remover un dato de la lista de "tasks"
+		removeTask: function removeTask(id) {
+			_dispatcher2.default.handleAction({
+				actionType: _constants2.default.REMOVE_TASK,
+				id: id
+			});
+		}
+	};
+
+	exports.default = actions;
 
 /***/ }
 /******/ ]);

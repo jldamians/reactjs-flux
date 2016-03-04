@@ -11,7 +11,7 @@ class List extends Component{
       <ListGroup>
         {
           this.props.items.map((item) => {
-            return  <Item key={item.id} title={item.title} />
+            return  <Item key={item.id} data={item} remove={this.props.remove}  />
           })
         }
       </ListGroup>

@@ -54,22 +54,31 @@ Dispatcher.register((payload) => {
 
 	switch(action.actionType) {
 		case constants.ADD_TASK:
-			_store.list.push(action.data)
+			_store.list.push(action.id)
 
    		store.emit(CHANGE_EVENT)
 
     	break
     case constants.REMOVE_TASK:
-    	_store.list.splice(action.data.id)
+    	let item = -1 ;
 
-    	store.emit(CHANGE_EVENT)
+    	_store.list.forEach(function(element, index){
+    		if ( element.id === action.id ) {
+    			item = index
+    		}
+    	})
+
+    	if ( item != -1 ) {
+    		_store.list.splice(item, 1)
+    		store.emit(CHANGE_EVENT)
+    	}
 
     	break
     case constants.LOAD_TASK:
     	_store.list = action.data
 
     	store.emit(CHANGE_EVENT)
-    	
+
     	break
     default:
     	return true

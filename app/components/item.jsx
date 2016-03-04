@@ -7,11 +7,11 @@ class Item extends Component{
 	render() {
 		return(
 			<ListGroupItem bsStyle="success">
-				<Button>
+				<Button onClick={this.props.remove.bind(null, this.props.data.id)}>
 					<Glyphicon glyph="trash" />
 				</Button>
 				&nbsp;&nbsp;
-				{this.props.title}
+				{this.props.data.name}
 			</ListGroupItem>
 		)
 	}
