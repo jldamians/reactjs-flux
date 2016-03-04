@@ -3,7 +3,7 @@
 import React from 'react'
 import { render } from 'react-dom'
 
-import List from './components/list'
+import Main from './components/main'
 
 var _tasks = [
   { id: 1, title: "Levantamiento de Información"},
@@ -14,6 +14,6 @@ var _tasks = [
   { id: 6, title: "Implementacion en Producción"}
 ]
 
-render(<List items={_tasks} />, document.getElementById('app'))
+render(<Main tasks={_tasks} />, document.getElementById('app'))
 
 
