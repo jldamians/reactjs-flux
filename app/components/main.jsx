@@ -4,6 +4,7 @@ import React, {Component} from 'react'
 import { Grid, Row, Col } from 'react-bootstrap'
 
 import List from './list'
+import Add from './add'
 
 class Main extends Component {
 	render(){
@@ -11,6 +12,7 @@ class Main extends Component {
 		  <Grid>
 		    <Row className="show-grid">
 		    	<Col xs={6} sm={6} md={6} xsOffset={3} smOffset={3} mdOffset={3}>
+		    		<Add/>
 						<List items={this.props.tasks} />
 					</Col>
 		    </Row>
