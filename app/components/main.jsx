@@ -9,6 +9,10 @@ import Add from './add'
 import Store from '../stores'
 import Action from '../actions'
 
+// see references:
+  // https://medium.com/@tribou/react-and-flux-migrating-to-es6-with-babel-and-eslint-6390cf4fd878#.wm96wrfj2
+  // https://github.com/tylermcginnis/Flux-Todolist/blob/master/app/stores/todoStore.js
+
 class Main extends Component {
   constructor(props) {
   	super(props)
