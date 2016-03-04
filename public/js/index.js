@@ -52,13 +52,13 @@
 
 	var _reactDom = __webpack_require__(158);
 
-	var _tasks2 = __webpack_require__(408);
-
-	var _tasks3 = _interopRequireDefault(_tasks2);
-
 	var _main = __webpack_require__(406);
 
 	var _main2 = _interopRequireDefault(_main);
+
+	var _tasks2 = __webpack_require__(408);
+
+	var _tasks3 = _interopRequireDefault(_tasks2);
 
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
@@ -36569,6 +36569,10 @@
 
 	var _react2 = _interopRequireDefault(_react);
 
+	var _reactDom = __webpack_require__(158);
+
+	var _reactDom2 = _interopRequireDefault(_reactDom);
+
 	var _reactBootstrap = __webpack_require__(160);
 
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
@@ -36582,13 +36586,23 @@
 	var Add = function (_Component) {
 	  _inherits(Add, _Component);
 
-	  function Add() {
+	  function Add(props) {
 	    _classCallCheck(this, Add);
 
-	    return _possibleConstructorReturn(this, Object.getPrototypeOf(Add).apply(this, arguments));
+	    var _this = _possibleConstructorReturn(this, Object.getPrototypeOf(Add).call(this, props));
+
+	    _this._handleAdd = _this._handleAdd.bind(_this);
+	    return _this;
 	  }
 
 	  _createClass(Add, [{
+	    key: '_handleAdd',
+	    value: function _handleAdd(event) {
+	      var elements = _reactDom2.default.findDOMNode(this.refs.nameTask);
+	      var nameTask = elements.querySelector('input').value;
+	      console.log(nameTask);
+	    }
+	  }, {
 	    key: 'render',
 	    value: function render() {
 	      return _react2.default.createElement(
@@ -36600,12 +36614,17 @@
 	          _react2.default.createElement(
 	            _reactBootstrap.Row,
 	            null,
-	            _react2.default.createElement(_reactBootstrap.Input, { type: 'text', label: 'Tarea', placeholder: 'Nombre de la tarea' })
+	            _react2.default.createElement(_reactBootstrap.Input, {
+	              ref: 'nameTask',
+	              type: 'text',
+	              label: 'Tarea',
+	              placeholder: 'Nombre de la tarea'
+	            })
 	          ),
 	          _react2.default.createElement(
 	            _reactBootstrap.Row,
 	            null,
-	            _react2.default.createElement(_reactBootstrap.ButtonInput, { value: 'Registrar' })
+	            _react2.default.createElement(_reactBootstrap.ButtonInput, { onClick: this._handleAdd, value: 'Registrar' })
 	          )
 	        )
 	      );
@@ -36626,7 +36645,7 @@
 	Object.defineProperty(exports, "__esModule", {
 	  value: true
 	});
-	var tasks = [{ id: 1, title: "Levantamiento de Información" }, { id: 2, title: "Requerimientos funcionales" }, { id: 3, title: "Diseño de DB" }, { id: 4, title: "Desarrollo del Sistema" }, { id: 5, title: "Pruebas Unitarias" }, { id: 6, title: "Implementacion en Producción" }];
+	var tasks = [{ id: 1, title: "Levantamiento de Información" }, { id: 2, title: "Requerimientos funcionales" }, { id: 3, title: "Diseño de DB" }, { id: 4, title: "Desarrollo del Sistema" }, { id: 5, title: "Pruebas Unitarias" }, { id: 6, title: "Implementacion en Producción" }, { id: 7, title: "Capacitaciones" }, { id: 8, title: "Cierre del Proyecto" }];
 
 	exports.default = tasks;
 
