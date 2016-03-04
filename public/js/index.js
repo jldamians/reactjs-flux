@@ -19758,8 +19758,9 @@
 	function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
 
 	// see references:
-	// https://medium.com/@tribou/react-and-flux-migrating-to-es6-with-babel-and-eslint-6390cf4fd878#.wm96wrfj2
-	// https://github.com/tylermcginnis/Flux-Todolist/blob/master/app/stores/todoStore.js
+	// teoria de flux: http://es.slideshare.net/eduardtomas/react-flux-y-react-native
+	// ejemplo de ES6: https://medium.com/@tribou/react-and-flux-migrating-to-es6-with-babel-and-eslint-6390cf4fd878#.wm96wrfj2
+	// ejemplo de ES5: https://github.com/tylermcginnis/Flux-Todolist/blob/master/app/stores/todoStore.js
 
 	var Main = function (_Component) {
 	  _inherits(Main, _Component);

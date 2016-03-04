@@ -10,8 +10,9 @@ import Store from '../stores'
 import Action from '../actions'
 
 // see references:
-  // https://medium.com/@tribou/react-and-flux-migrating-to-es6-with-babel-and-eslint-6390cf4fd878#.wm96wrfj2
-  // https://github.com/tylermcginnis/Flux-Todolist/blob/master/app/stores/todoStore.js
+  // teoria de flux: http://es.slideshare.net/eduardtomas/react-flux-y-react-native
+  // ejemplo de ES6: https://medium.com/@tribou/react-and-flux-migrating-to-es6-with-babel-and-eslint-6390cf4fd878#.wm96wrfj2
+  // ejemplo de ES5: https://github.com/tylermcginnis/Flux-Todolist/blob/master/app/stores/todoStore.js
 
 class Main extends Component {
   constructor(props) {
